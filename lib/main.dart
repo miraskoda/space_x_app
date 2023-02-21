@@ -1,115 +1,150 @@
+import 'dart:async';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:responsive_framework/utils/responsive_utils.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:space_x_app/app/app.locator.dart';
+import 'package:space_x_app/app/app.router.dart';
+import 'package:space_x_app/config/firebase/analytics_service.dart';
+import 'package:space_x_app/config/services/exception_tracker.dart';
+import 'package:space_x_app/config/services/push_notification_service.dart';
+import 'package:space_x_app/config/services/sentry.dart';
+import 'package:space_x_app/config/theme/light_theme.dart';
+import 'package:space_x_app/core/constants/constants.dart';
+import 'package:space_x_app/init_app.dart';
+import 'package:stacked/stacked_annotations.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:stacked_themes/stacked_themes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+Future<void> main() async {
+  runZonedGuarded<Future<void>>(() async {
+    await loadMainAppRequirements();
+    runApp(
+      const Base(),
     );
-  }
+  }, (exception, stackTrace) async {
+    ExceptionTracker.track(exception, stackTrace);
+  });
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+Future<void> loadMainAppRequirements() async {
+  await setupSetry();
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  PushNotificationService.init();
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  await ThemeManager.initialise();
+  await setupInjector(environment: Environment.dev);
+}
 
-  final String title;
+class Base extends StatefulWidget {
+  const Base({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Base> createState() => BaseState();
+
+  static BaseState? of(BuildContext context) =>
+      context.findAncestorStateOfType<BaseState>();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class BaseState extends State<Base> with WidgetsBindingObserver {
+  final _sentryRouteObserver = SentryNavigatorObserver();
 
-  void _incrementCounter() {
+  final AnalyticsService _analyticsService = inject<AnalyticsService>();
+  final SharedPreferences _sharedPreferences = inject<SharedPreferences>();
+  AppLifecycleState? appState;
+
+  bool internetConnected = true;
+  late Locale _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    _locale =
+        Locale(_sharedPreferences.getString(kCurrentLocale) ?? kDefaultLocale);
+    appState = WidgetsBinding.instance.lifecycleState;
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  void setLocale(Locale value) {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _locale = value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    return ThemeBuilder(
+        darkTheme: lightTheme,
+        lightTheme: lightTheme,
+        defaultThemeMode: ThemeMode.light,
+        builder: (BuildContext context, ThemeData? regularTheme,
+            ThemeData? darkTheme, ThemeMode? themeMode) {
+          return MaterialApp(
+            locale: _locale,
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('cs'),
+            ],
+            onGenerateTitle: (context) => "Doktor online",
+            showSemanticsDebugger: false,
+            debugShowCheckedModeBanner: false,
+            theme: regularTheme,
+            darkTheme: darkTheme,
+            themeMode: themeMode,
+            navigatorObservers: _analyticsService.analytics != null
+                ? [
+                    _sentryRouteObserver,
+                    FirebaseAnalyticsObserver(
+                        analytics: _analyticsService.analytics!)
+                  ]
+                : [_sentryRouteObserver],
+            navigatorKey: StackedService.navigatorKey,
+            onGenerateRoute: StackedRouter().onGenerateRoute,
+            builder: (BuildContext context, Widget? child) {
+              return NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (OverscrollIndicatorNotification overscroll) {
+                  overscroll.disallowIndicator();
+                  return false;
+                },
+                child: MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                      textScaleFactor: 1, alwaysUse24HourFormat: true),
+                  child: ResponsiveWrapper.builder(
+                    InitApp(child: child ?? const SizedBox.shrink()),
+                    minWidth: kMinSupportedWidth,
+                    maxWidth: kMaxSupportedWidth,
+                    defaultScale: true,
+                    minWidthLandscape: kMinSupportedWidth,
+                    maxWidthLandscape: kMaxSupportedWidth,
+                    defaultScaleLandscape: true,
+                    landscapePlatforms: ResponsiveTargetPlatform.values,
+                    breakpoints: const [
+                      ResponsiveBreakpoint.resize(kMinSupportedWidth,
+                          name: TABLET),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        });
   }
 }

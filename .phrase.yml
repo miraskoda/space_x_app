@@ -1,0 +1,14 @@
+phrase:
+  access_token: 966134736497a13968c563358f3715bf2a6280ab18a7d0b0c3085d60bcc3f7a4
+  project_id: 99f447b6543cbb81261097cb1bb99867
+  push:
+    sources:
+      - file: lib/l10n/app_<locale_name>.arb
+        params:
+          file_format: arb
+  pull:
+    targets:
+      - file: lib/l10n/app_<locale_name>.arb
+        params:
+          file_format: arb
+
