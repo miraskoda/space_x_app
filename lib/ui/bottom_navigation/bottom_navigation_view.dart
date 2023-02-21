@@ -48,8 +48,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     elevation: 0,
                     backgroundColor: Colors.transparent,
                     currentIndex: viewModel.index,
-                    selectedItemColor: spaceGreySemiLight,
-                    unselectedItemColor: spaceWhite,
+                    unselectedItemColor: spaceGreySemiLight,
+                    selectedItemColor: spaceWhite,
                     onTap: (int i) => viewModel.setTabIndex(i, context),
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(

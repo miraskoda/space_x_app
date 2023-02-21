@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_app/ui/bottom_navigation/third/third_viewmodel.dart';
+import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
 import 'package:space_x_app/ui/uni_widgets/tablet_wrapper.dart';
 import 'package:stacked/stacked.dart';
 
@@ -22,19 +23,23 @@ class _ThirdViewState extends State<ThirdView> {
               ),
           builder:
               (BuildContext context, ThirdViewModel viewModel, Widget? child) {
-            return SafeArea(
-              child: TabletWrapper(
-                  child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [const Text('third')],
-                      ),
-                    ),
-                  ),
-                ],
-              )),
+            return Scaffold(
+              appBar: PrimaryAppBar(
+                centeredTitle: true,
+                title: 'Company Info',
+              ),
+              body: SafeArea(
+                child: TabletWrapper(
+                  child: viewModel.isBusy
+                      ? const CircularProgressIndicator()
+                      : Column(
+                          children: [
+                            Text(viewModel.data?.ceo ?? ''),
+                            Text(viewModel.data?.name ?? ''),
+                          ],
+                        ),
+                ),
+              ),
             );
           }),
     );

@@ -77,7 +77,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       automaticallyImplyLeading: false,
       shadowColor: theme.shadowColor,
-      backgroundColor: spaceGreySemiLight,
+      backgroundColor: spaceGreyDark,
     );
   }
 }
