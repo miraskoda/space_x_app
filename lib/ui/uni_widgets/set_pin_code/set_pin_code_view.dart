@@ -58,17 +58,6 @@ class _PinCodeViewState extends State<PinCodeView> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: SizedBox(
-                              width: 64,
-                              height: 64,
-                              child: SvgPicture.asset(
-                                  "assets/svg/binaryLock.svg",
-                                  width: context.mq.size.width,
-                                  color: spacePrimary),
-                            ),
-                          ),
                           if (MediaQuery.of(context).size.width >= 360)
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

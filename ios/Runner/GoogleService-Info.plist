@@ -13,21 +13,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.spaceXAppAPI</string>
+	<string>com.example.space.x.api</string>
 	<key>PROJECT_ID</key>
 	<string>spacex-73edc</string>
 	<key>STORAGE_BUCKET</key>
 	<string>spacex-73edc.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:681517240136:ios:4b2efccf438f2e8f3e2d7d</string>
 </dict>

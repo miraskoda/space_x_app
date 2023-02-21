@@ -50,7 +50,7 @@ const Color spaceYellowPinkSemiLight = Color(0xFFF5C649);
 const Color spaceYellowPinkLight = Color(0xFFFCECC2);
 const Color spaceYellowPinkBright = Color(0xFFFEF7E7);
 
-const Color spaceGreyDark = Color(0xFFB58609);
+const Color spaceGreyDark = Color(0xFF222222);
 const Color spaceGreySemiDark = Color(0xFF333D3F);
 const Color spaceGrey = Color(0xFF4D5557);
 const Color spaceGreySemiLight = Color(0xFF999E9F);

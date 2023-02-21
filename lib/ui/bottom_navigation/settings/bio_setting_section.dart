@@ -16,6 +16,7 @@ import 'package:space_x_app/core/resources/authentication.dart';
 import 'package:space_x_app/ui/bottom_navigation/settings/settings_viewmodel.dart';
 import 'package:space_x_app/ui/uni_widgets/set_pin_code/set_pin_code_view.dart';
 import 'package:space_x_app/ui/uni_widgets/settings_value_switch.dart';
+import 'package:space_x_app/ui/uni_widgets/shimmer.dart';
 
 class BioSettingSection extends StatefulWidget {
   SettingsViewModel viewModel;
@@ -105,96 +106,100 @@ class _BioSettingSectionState extends State<BioSettingSection> {
         future: getAvailableBiometric(),
         builder:
             (BuildContext context, AsyncSnapshot<List<BiometricType>> snap) {
-          if (bioType?.contains(BiometricType.face) == true) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(16),
-                Text(
-                  'safety'.toUpperCase(),
-                  style: context.theme.textTheme.bodyText2!.copyWith(
-                      color: spaceGreySemiLight,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w400),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Builder(builder: (context) {
-                      return SettingsValueSwitch(
-                          value: widget.viewModel.faceIdBool,
-                          label: 'loginWithFaceID',
-                          onChanged: (bool value) => handleBioSettingsChange(
-                              context, BiometricType.face, value));
-                    }),
-                    const Gap(16),
-                  ],
-                ),
-              ],
-            );
-          } else if (bioType?.contains(BiometricType.fingerprint) == true) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(16),
-                Text(
-                  'safety'.toUpperCase(),
-                  style: context.theme.textTheme.bodyText2!.copyWith(
-                      color: spaceGreySemiLight,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w400),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Builder(builder: (context) {
-                      return SettingsValueSwitch(
-                          value: widget.viewModel.touchIdBool,
-                          label: 'loginWithTouchID',
-                          onChanged: (bool value) => handleBioSettingsChange(
-                              context, BiometricType.fingerprint, value));
-                    }),
-                    const Gap(16),
-                  ],
-                ),
-              ],
-            );
-          } else {
-            return _sharedPreferences.getString(kUserPinCode) == null
-                ? Column(
+          if (snap.connectionState == ConnectionState.done) {
+            if (bioType?.contains(BiometricType.face) == true) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Gap(16),
+                  Text(
+                    'safety'.toUpperCase(),
+                    style: context.theme.textTheme.bodyText2!.copyWith(
+                        color: spaceGreySemiLight,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Builder(builder: (context) {
+                        return SettingsValueSwitch(
+                            value: widget.viewModel.faceIdBool,
+                            label: 'loginWithFaceID',
+                            onChanged: (bool value) => handleBioSettingsChange(
+                                context, BiometricType.face, value));
+                      }),
                       const Gap(16),
-                      Text(
-                        'safety'.toUpperCase(),
-                        style: context.theme.textTheme.bodyText2!.copyWith(
-                            color: spaceGreySemiLight,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Builder(builder: (context) {
-                            return SettingsValueSwitch(
-                                butonActionDisabled: _sharedPreferences
-                                        .getString(kUserPinCode) !=
-                                    null,
-                                buttonAction: true,
-                                value: false,
-                                label: 'setPINCode',
-                                onChanged: (bool value) => _sharedPreferences
-                                            .getString(kUserPinCode) !=
-                                        null
-                                    ? null
-                                    : handleSetPin());
-                          }),
-                          const Gap(16),
-                        ],
-                      ),
                     ],
-                  )
-                : const SizedBox.shrink();
+                  ),
+                ],
+              );
+            } else if (bioType?.contains(BiometricType.fingerprint) == true) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Gap(16),
+                  Text(
+                    'safety'.toUpperCase(),
+                    style: context.theme.textTheme.bodyText2!.copyWith(
+                        color: spaceGreySemiLight,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Builder(builder: (context) {
+                        return SettingsValueSwitch(
+                            value: widget.viewModel.touchIdBool,
+                            label: 'loginWithTouchID',
+                            onChanged: (bool value) => handleBioSettingsChange(
+                                context, BiometricType.fingerprint, value));
+                      }),
+                      const Gap(16),
+                    ],
+                  ),
+                ],
+              );
+            } else {
+              return _sharedPreferences.getString(kUserPinCode) == null
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Gap(16),
+                        Text(
+                          'safety'.toUpperCase(),
+                          style: context.theme.textTheme.bodyText2!.copyWith(
+                              color: spaceGreySemiLight,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Builder(builder: (context) {
+                              return SettingsValueSwitch(
+                                  butonActionDisabled: _sharedPreferences
+                                          .getString(kUserPinCode) !=
+                                      null,
+                                  buttonAction: true,
+                                  value: false,
+                                  label: 'setPINCode',
+                                  onChanged: (bool value) => _sharedPreferences
+                                              .getString(kUserPinCode) !=
+                                          null
+                                      ? null
+                                      : handleSetPin());
+                            }),
+                            const Gap(16),
+                          ],
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink();
+            }
+          } else {
+            return shimmer(86);
           }
         });
   }

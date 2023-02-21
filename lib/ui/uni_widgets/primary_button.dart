@@ -19,8 +19,6 @@ class PrimaryButton extends StatelessWidget {
   final bool warningMode;
   final EdgeInsets? padding;
   final double? elevationCustome;
-  final bool continueIcon;
-  final bool beforeIcon;
   final String? label;
 
   const PrimaryButton({
@@ -39,8 +37,6 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.disabledMode = false,
     this.warningMode = false,
-    this.continueIcon = false,
-    this.beforeIcon = false,
     this.tooltipMessage,
   }) : super(key: key);
 
@@ -107,15 +103,6 @@ class PrimaryButton extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if (beforeIcon)
-                        Padding(
-                          padding: const EdgeInsets.only(right: 6),
-                          child: SvgPicture.asset(
-                            "assets/svg/phoneHangup.svg",
-                            color: Colors.white,
-                            width: 20,
-                          ),
-                        ),
                       Text(
                         text ?? "",
                         style: context.theme.textTheme.button!.copyWith(
@@ -128,11 +115,6 @@ class PrimaryButton extends StatelessWidget {
                                     ? spacePrimaryDark
                                     : Colors.white),
                       ),
-                      if (continueIcon)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: SvgPicture.asset("assets/svg/rightArrow.svg"),
-                        )
                     ],
                   )),
         ),

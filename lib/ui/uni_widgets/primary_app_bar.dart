@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
+import 'package:space_x_app/config/theme/light_theme.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? child;
@@ -42,8 +43,10 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.only(right: 10),
                 child: Text(
                   title!,
-                  style: context.theme.textTheme.bodyText1!
-                      .copyWith(fontWeight: FontWeight.w600, fontSize: 22),
+                  style: context.theme.textTheme.bodyText1!.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 22,
+                      color: spaceWhite),
                 ),
               ),
             )
@@ -59,16 +62,13 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: () => customLeading != null
                     ? customLeading!()
                     : Navigator.of(context).pop(),
-                child: SizedBox(
+                child: const SizedBox(
                     height: 50,
                     width: 50,
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 3),
-                        child: SvgPicture.asset(
-                          "assets/svg/chevron_left_gray.svg",
-                          width: 14,
-                        ),
+                        padding: EdgeInsets.only(top: 3),
+                        child: Icon(Icons.chevron_left),
                       ),
                     )),
               ),
@@ -77,7 +77,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       automaticallyImplyLeading: false,
       shadowColor: theme.shadowColor,
-      backgroundColor: backgroundColor ?? theme.backgroundColor,
+      backgroundColor: spaceGreySemiLight,
     );
   }
 }

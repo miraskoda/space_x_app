@@ -1,15 +1,18 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:space_x_app/app/app.locator.dart';
 import 'package:space_x_app/core/utils/tracking_events.dart';
 
 class AnalyticsService {
-  String? currentEnv;
+  String? currentEnv = kDebugMode ? 'dev' : 'prod';
   String? currentLocalVersion;
   FirebaseAnalytics? analytics;
 
   Future<void> initialize() async {
     analytics = FirebaseAnalytics.instance;
     analytics?.logAppOpen();
+    currentLocalVersion = (await PackageInfo.fromPlatform()).version;
   }
 
   void trackUserClick(String elementId) async {

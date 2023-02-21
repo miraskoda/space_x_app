@@ -22,13 +22,10 @@ class SplashScreen extends StatelessWidget {
             SizedBox(
               width: min(context.mq.size.width / 1.5, 400),
               child: Center(
-                child: Stack(
-                  children: [
-                    Visibility(
-                      visible: true,
-                      child: Image.asset("assets/images/one.png"),
-                    ),
-                  ],
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 300),
+                  opacity: 1,
+                  child: Image.asset("assets/images/space_x_logo.png"),
                 ),
               ),
             ),

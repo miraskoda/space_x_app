@@ -20,8 +20,12 @@ class SettingsViewModel extends BaseViewModel {
   final SharedPreferences _sharedPreferences = inject<SharedPreferences>();
   bool notificationBool =
       inject<SharedPreferences>().getBool(kNotificationsAllowedKey) ?? false;
-  bool faceIdBool = false;
-  bool touchIdBool = false;
+  bool faceIdBool =
+      inject<SharedPreferences>().getBool(kAuthorizationFaceAllowedKey) ??
+          false;
+  bool touchIdBool =
+      inject<SharedPreferences>().getBool(kAuthorizationTouchAllowedKey) ??
+          false;
 
   SettingsViewModel();
 

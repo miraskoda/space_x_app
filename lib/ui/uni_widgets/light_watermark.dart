@@ -4,9 +4,7 @@ import 'package:space_x_app/config/theme/light_theme.dart';
 
 class LightWatermark extends StatelessWidget {
   Widget? child;
-  bool secondary;
-  LightWatermark({this.child, this.secondary = false, Key? key})
-      : super(key: key);
+  LightWatermark({this.child, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,23 +13,17 @@ class LightWatermark extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         child: Container(
           color: spaceWhite,
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.center,
           constraints: BoxConstraints(
             minWidth: MediaQuery.of(context).size.width,
             minHeight: MediaQuery.of(context).size.height,
           ),
           child: Opacity(
-            opacity: 0.05,
-            child: SvgPicture.asset(
-              secondary
-                  ? "assets/svg/logoIcon.svg"
-                  : "assets/svg/logoIconSmall.svg",
-              width: secondary
-                  ? MediaQuery.of(context).size.width / 2
-                  : MediaQuery.of(context).size.width,
-              height: secondary
-                  ? MediaQuery.of(context).size.height / 1.5
-                  : MediaQuery.of(context).size.height / 2,
+            opacity: 0.03,
+            child: Image.asset(
+              "assets/images/space_x_logo.png",
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.height / 2,
             ),
           ),
         ),
