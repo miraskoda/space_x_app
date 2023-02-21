@@ -3,10 +3,10 @@ import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/ui/bottom_navigation/bottom_navigation_viewmodel.dart';
-import 'package:space_x_app/ui/bottom_navigation/first/first_view.dart';
-import 'package:space_x_app/ui/bottom_navigation/second/second_view.dart';
+import 'package:space_x_app/ui/bottom_navigation/company/company_view.dart';
+import 'package:space_x_app/ui/bottom_navigation/past_launches/past_launches_view.dart';
 import 'package:space_x_app/ui/bottom_navigation/settings/settings_view.dart';
-import 'package:space_x_app/ui/bottom_navigation/third/third_view.dart';
+import 'package:space_x_app/ui/bottom_navigation/upcomming_launches/upcomming_view.dart';
 import 'package:space_x_app/ui/uni_widgets/light_watermark.dart';
 import 'package:stacked/stacked.dart';
 
@@ -36,7 +36,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           body: LightWatermark(child: getViewForIndex(viewModel.index)),
           bottomNavigationBar: orientation == Orientation.portrait
               ? Material(
-                  color: spaceGreyDark,
+                  color: context.theme.primaryColorDark,
                   elevation: 0.0,
                   shape: const RoundedRectangleBorder(
                       borderRadius:
@@ -48,32 +48,44 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     elevation: 0,
                     backgroundColor: Colors.transparent,
                     currentIndex: viewModel.index,
-                    unselectedItemColor: spaceGreySemiLight,
-                    selectedItemColor: spaceWhite,
+                    unselectedItemColor: context.theme.primaryColorLight,
+                    selectedItemColor: context.theme.backgroundColor,
                     onTap: (int i) => viewModel.setTabIndex(i, context),
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(
-                        label: "first",
-                        icon: Icon(
-                          Icons.first_page,
+                        label: "Past",
+                        icon: Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Icon(
+                            Icons.first_page,
+                          ),
                         ),
                       ),
                       BottomNavigationBarItem(
-                        label: "second",
-                        icon: Icon(
-                          Icons.first_page,
+                        label: "Upcomming",
+                        icon: Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Icon(
+                            Icons.first_page,
+                          ),
                         ),
                       ),
                       BottomNavigationBarItem(
-                        label: "third",
-                        icon: Icon(
-                          Icons.first_page,
+                        label: "Company",
+                        icon: Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Icon(
+                            Icons.first_page,
+                          ),
                         ),
                       ),
                       BottomNavigationBarItem(
-                        label: "settings",
-                        icon: Icon(
-                          Icons.settings,
+                        label: "Settings",
+                        icon: Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Icon(
+                            Icons.settings,
+                          ),
                         ),
                       ),
                     ],
@@ -90,13 +102,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
     if (!_viewCache.containsKey(index)) {
       switch (index) {
         case kFirstIndex:
-          _viewCache[index] = const FirstView();
+          _viewCache[index] = const PastLaunchesView();
           break;
         case kSecondIndex:
-          _viewCache[index] = const SecondView();
+          _viewCache[index] = const UpcommingView();
           break;
         case kThirdIndex:
-          _viewCache[index] = const ThirdView();
+          _viewCache[index] = const CompanyView();
           break;
         case kSettingsIndex:
           _viewCache[index] = const SettingsView();

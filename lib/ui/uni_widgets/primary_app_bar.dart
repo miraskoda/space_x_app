@@ -46,7 +46,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: context.theme.textTheme.bodyText1!.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 22,
-                      color: spaceWhite),
+                      color: context.theme.backgroundColor),
                 ),
               ),
             )
@@ -77,7 +77,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       automaticallyImplyLeading: false,
       shadowColor: theme.shadowColor,
-      backgroundColor: spaceGreyDark,
+      backgroundColor: context.theme.primaryColorDark,
     );
   }
 }

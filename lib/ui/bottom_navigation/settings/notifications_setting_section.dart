@@ -37,10 +37,7 @@ class NotificationsSettingSection extends StatelessWidget {
         const Gap(16),
         Text(
           'notifications'.toUpperCase(),
-          style: context.theme.textTheme.bodyText2!.copyWith(
-              color: spaceGreySemiLight,
-              fontSize: 11,
-              fontWeight: FontWeight.w400),
+          style: context.theme.textTheme.bodyText2!,
         ),
         SettingsValueSwitch(
             value: viewModel.notificationBool,

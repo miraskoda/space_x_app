@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_app/config/firebase/analytics_service.dart';
 import 'package:space_x_app/config/firebase/crashlytics_service.dart';
 import 'package:space_x_app/config/firebase/remote_config_service.dart';
+import 'package:space_x_app/core/managers/data_holder.dart';
 import 'package:space_x_app/data/repository/space_repository.dart';
 import 'package:space_x_app/data/repository_impl/space_repository_impl.dart';
 import 'package:space_x_app/ui/bottom_navigation/bottom_navigation_view.dart';
@@ -27,9 +28,9 @@ import 'package:stacked_themes/stacked_themes.dart';
       classType: ThemeService,
       resolveUsing: ThemeService.getInstance,
     ),
-
     LazySingleton<SpaceRepository>(
         asType: SpaceRepository, classType: SpaceRepositoryImpl),
+    Singleton(asType: DataHolder, classType: DataHolder),
 
     // Presolve
     Presolve(

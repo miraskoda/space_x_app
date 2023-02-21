@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 const Color _spaceWhite = Color(0xFFF7FAFF);
 const Color trueWhite = Color(0xFFFFFFFF);
-const Color _spaceGreyDark = Color.fromARGB(255, 0, 100, 172);
-const Color _spaceGreySemiDark = Color.fromARGB(255, 70, 130, 233);
-const Color _spaceGrey = Color.fromARGB(255, 53, 104, 175);
-const Color _spaceGreySemiLight = Color.fromARGB(255, 69, 209, 237);
-const Color _spaceGreyLight = Color.fromARGB(255, 154, 206, 232);
+const Color _spaceGreyDark = Color(0xFF222222);
+const Color _spaceGreySemiDark = Color(0xFF333D3F);
+const Color _spaceGrey = Color(0xFF4D5557);
+const Color _spaceGreySemiLight = Color(0xFF999E9F);
+const Color _spaceGreyLight = Color(0xFFCCCECF);
 
-final ThemeData lightTheme = ThemeData(
+final ThemeData darkTheme = ThemeData(
   primaryColorLight: _spaceGreyLight,
   backgroundColor: trueWhite,
   primaryColor: _spaceGrey,

@@ -48,12 +48,12 @@ class LanguageChange extends StatelessWidget {
             Text(currLocale,
                 style: context.theme.textTheme.bodyText1!.copyWith(
                     fontSize: 13,
-                    color: spaceGrey,
+                    color: context.theme.primaryColor,
                     fontWeight: FontWeight.w400)),
             const Gap(16),
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color: spaceGrey,
+              color: context.theme.primaryColor,
             )
           ],
         ),
@@ -114,11 +114,11 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'titleLanguage',
+                                'Language',
                                 style: context.theme.textTheme.bodyText1!
                                     .copyWith(
                                         fontSize: 15,
-                                        color: spaceGreySemiDark,
+                                        color: context.theme.primaryColorDark,
                                         fontWeight: FontWeight.w500),
                               ),
                               const Icon(
@@ -151,7 +151,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
                               style: context.theme.textTheme.bodyText1!
                                   .copyWith(
                                       fontSize: 13,
-                                      color: spaceGrey,
+                                      color: context.theme.primaryColor,
                                       fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -160,7 +160,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
                           width: 25,
                           height: 25,
                           child: Radio<String>(
-                            activeColor: spacePrimary,
+                            activeColor: context.theme.primaryColor,
                             value: value,
                             groupValue: selectedLocale,
                             onChanged: (String? newValue) {

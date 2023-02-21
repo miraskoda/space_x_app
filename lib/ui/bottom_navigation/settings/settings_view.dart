@@ -9,8 +9,10 @@ import 'package:space_x_app/ui/bottom_navigation/settings/settings_viewmodel.dar
 import 'package:space_x_app/ui/uni_widgets/language_change.dart';
 import 'package:space_x_app/ui/uni_widgets/light_watermark.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
+import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 import 'package:space_x_app/ui/uni_widgets/tablet_wrapper.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -61,10 +63,7 @@ class _SettingsViewState extends State<SettingsView> {
                       const Gap(16),
                       Text(
                         'titleLanguage'.toUpperCase(),
-                        style: context.theme.textTheme.bodyText2!.copyWith(
-                            color: spaceGreySemiLight,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w400),
+                        style: context.theme.textTheme.bodyText2!,
                       ),
                       const Gap(5),
                       Row(
@@ -80,10 +79,17 @@ class _SettingsViewState extends State<SettingsView> {
                                 viewModel.onLanguageChange(loc, context),
                             currLocale: viewModel.currentLanguageString,
                             locales: kAvailableLocalesString,
-                          )
+                          ),
                         ],
                       ),
-                      const Gap(16),
+                      const Gap(40),
+                      Center(
+                        child: PrimaryButton(
+                            text: "Toggle dark/light theme",
+                            onPressed: () {
+                              getThemeManager(context).toggleDarkLightTheme();
+                            }),
+                      )
                     ],
                   ),
                 ],

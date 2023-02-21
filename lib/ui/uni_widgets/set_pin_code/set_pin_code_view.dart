@@ -101,7 +101,8 @@ class _PinCodeViewState extends State<PinCodeView> {
                                       : (_) => viewModel.tapToContinue(),
                                   autoFocus: true,
                                   textStyle: context.theme.textTheme.bodyText2!
-                                      .copyWith(color: spacePrimary),
+                                      .copyWith(
+                                          color: context.theme.primaryColor),
                                   length: 4,
                                   obscureText: true,
                                   showCursor: false,
@@ -114,12 +115,17 @@ class _PinCodeViewState extends State<PinCodeView> {
                                       errorBorderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(5),
                                       shape: PinCodeFieldShape.box,
-                                      inactiveFillColor: spaceWhite,
-                                      inactiveColor: spaceGreyLight,
-                                      activeColor: spaceGreyLight,
-                                      activeFillColor: spaceWhite,
-                                      selectedColor: spacePrimary,
-                                      selectedFillColor: spaceWhite,
+                                      inactiveFillColor:
+                                          context.theme.backgroundColor,
+                                      inactiveColor:
+                                          context.theme.primaryColorLight,
+                                      activeColor:
+                                          context.theme.primaryColorLight,
+                                      activeFillColor:
+                                          context.theme.backgroundColor,
+                                      selectedColor: context.theme.primaryColor,
+                                      selectedFillColor:
+                                          context.theme.backgroundColor,
                                       disabledColor: Colors.transparent,
                                       borderWidth: 1.5,
                                       fieldWidth: 42),
@@ -167,7 +173,7 @@ class _PinCodeViewState extends State<PinCodeView> {
                                       style: context.theme.textTheme.bodyText2!
                                           .copyWith(
                                         fontWeight: FontWeight.w400,
-                                        color: spaceRed,
+                                        color: context.theme.errorColor,
                                       )),
                                 ],
                               ))
@@ -181,8 +187,9 @@ class _PinCodeViewState extends State<PinCodeView> {
                             : viewModel.tapToContinue,
                         child: Text(
                           'confirmButton',
-                          style:
-                              const TextStyle(color: spaceWhite, fontSize: 14),
+                          style: TextStyle(
+                              color: context.theme.backgroundColor,
+                              fontSize: 14),
                         ),
                       ),
                       const Gap(20),

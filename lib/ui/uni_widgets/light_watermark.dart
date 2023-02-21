@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/theme/light_theme.dart';
 
 class LightWatermark extends StatelessWidget {
@@ -12,7 +13,7 @@ class LightWatermark extends StatelessWidget {
       SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Container(
-          color: spaceWhite,
+          color: context.theme.backgroundColor,
           alignment: Alignment.center,
           constraints: BoxConstraints(
             minWidth: MediaQuery.of(context).size.width,

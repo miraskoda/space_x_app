@@ -16,13 +16,13 @@ class ErrorViewDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'errorOccurred',
+              'Error occurred',
               style: context.theme.textTheme.headline5!,
               textAlign: TextAlign.center,
             ),
             const Gap(30),
             Text(
-              'noInternetConenction',
+              'Please try again later',
               style: context.theme.textTheme.subtitle1!,
             ),
             const Gap(30),

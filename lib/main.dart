@@ -16,6 +16,7 @@ import 'package:space_x_app/config/firebase/analytics_service.dart';
 import 'package:space_x_app/config/services/exception_tracker.dart';
 import 'package:space_x_app/config/services/push_notification_service.dart';
 import 'package:space_x_app/config/services/sentry.dart';
+import 'package:space_x_app/config/theme/dark_theme.dart';
 import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/init_app.dart';
@@ -87,9 +88,9 @@ class BaseState extends State<Base> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return ThemeBuilder(
-        darkTheme: lightTheme,
+        darkTheme: darkTheme,
         lightTheme: lightTheme,
-        defaultThemeMode: ThemeMode.light,
+        defaultThemeMode: ThemeMode.system,
         builder: (BuildContext context, ThemeData? regularTheme,
             ThemeData? darkTheme, ThemeMode? themeMode) {
           return MaterialApp(

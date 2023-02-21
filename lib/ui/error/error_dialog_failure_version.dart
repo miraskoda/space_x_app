@@ -60,7 +60,7 @@ class ErrorViewDialogFailureVersion extends StatelessWidget {
                 },
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
                   SvgPicture.asset("assets/svg/refresh.svg",
-                      color: spaceWhite, width: 18),
+                      color: context.theme.backgroundColor, width: 18),
                   const Gap(5),
                   Text('update'),
                 ])),

@@ -64,29 +64,33 @@ class PrimaryButton extends StatelessWidget {
                 fontSize: 14,
                 fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w600,
-                color: secondary == true ? spacePrimaryDark : Colors.white),
+                color: secondary == true
+                    ? context.theme.primaryColorDark
+                    : Colors.white),
             backgroundColor: disabledMode && secondary == true
                 ? Colors.white
                 : disabledMode
-                    ? spaceGreyBright
+                    ? context.theme.primaryColorLight
                     : secondary == true
                         ? Colors.white
                         : warningMode
-                            ? spaceRedSemiDark
+                            ? context.theme.primaryColorDark
                             : context.theme.primaryColor,
             shadowColor: disabledMode
                 ? Colors.transparent
                 : secondary == true
-                    ? spacePrimary.withOpacity(0.2)
-                    : spacePrimary,
+                    ? context.theme.primaryColor.withOpacity(0.2)
+                    : context.theme.primaryColor,
             shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: disabledMode && secondary == true
-                      ? spaceGreySemiLight
+                      ? context.theme.primaryColorLight
                       : disabledMode
                           ? Colors.transparent
                           : specialBorder ??
-                              (warningMode ? spaceRed : Colors.transparent)),
+                              (warningMode
+                                  ? context.theme.errorColor
+                                  : Colors.transparent)),
               borderRadius: BorderRadius.circular(20),
             ),
             padding: padding ??
@@ -112,7 +116,7 @@ class PrimaryButton extends StatelessWidget {
                             color: disabledMode
                                 ? Colors.black
                                 : secondary == true
-                                    ? spacePrimaryDark
+                                    ? context.theme.primaryColorDark
                                     : Colors.white),
                       ),
                     ],

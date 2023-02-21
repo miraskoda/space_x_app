@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_app/data/models/launch_model/launch_model.dart';
-import 'package:space_x_app/ui/bottom_navigation/second/second_viewmodel.dart';
+import 'package:space_x_app/ui/bottom_navigation/upcomming_launches/upcomming_viewmodel.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
 import 'package:space_x_app/ui/uni_widgets/tablet_wrapper.dart';
 import 'package:stacked/stacked.dart';
 
-class SecondView extends StatefulWidget {
-  const SecondView({Key? key}) : super(key: key);
+class UpcommingView extends StatefulWidget {
+  const UpcommingView({Key? key}) : super(key: key);
 
   @override
-  State<SecondView> createState() => _SecondViewState();
+  State<UpcommingView> createState() => _UpcommingViewState();
 }
 
-class _SecondViewState extends State<SecondView> {
+class _UpcommingViewState extends State<UpcommingView> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => Future.value(false),
-      child: ViewModelBuilder<SecondViewModel>.reactive(
-          viewModelBuilder: () => SecondViewModel(),
-          onViewModelReady: (SecondViewModel viewModel) => viewModel.initialise(
+      child: ViewModelBuilder<UpcommingViewModel>.reactive(
+          viewModelBuilder: () => UpcommingViewModel(),
+          onViewModelReady: (UpcommingViewModel viewModel) =>
+              viewModel.initialise(
                 context,
               ),
-          builder:
-              (BuildContext context, SecondViewModel viewModel, Widget? child) {
+          builder: (BuildContext context, UpcommingViewModel viewModel,
+              Widget? child) {
             return Scaffold(
+              backgroundColor: Colors.transparent,
               appBar: PrimaryAppBar(
                 centeredTitle: true,
                 title: 'Upcomming Launches',

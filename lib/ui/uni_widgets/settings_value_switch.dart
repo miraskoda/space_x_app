@@ -56,8 +56,8 @@ class SettingsValueSwitch extends StatelessWidget {
                 ),
               )
             : CupertinoSwitch(
-                activeColor: spacePrimary,
-                trackColor: spaceGreyLight,
+                activeColor: context.theme.primaryColor,
+                trackColor: context.theme.primaryColorLight,
                 value: value,
                 onChanged: onChanged,
               )

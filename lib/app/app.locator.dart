@@ -14,6 +14,7 @@ import 'package:stacked_themes/src/theme_service.dart';
 import '../config/firebase/analytics_service.dart';
 import '../config/firebase/crashlytics_service.dart';
 import '../config/firebase/remote_config_service.dart';
+import '../core/managers/data_holder.dart';
 import '../data/repository/space_repository.dart';
 import '../data/repository_impl/space_repository_impl.dart';
 
@@ -32,6 +33,7 @@ Future<void> setupInjector(
   inject.registerLazySingleton(() => NavigationService(), registerFor: {"dev"});
   inject.registerLazySingleton(() => ThemeService.getInstance());
   inject.registerLazySingleton<SpaceRepository>(() => SpaceRepositoryImpl());
+  inject.registerSingleton<DataHolder>(DataHolder());
   final sharedPreferences = await SharedPreferences.getInstance();
   inject.registerSingleton(sharedPreferences);
 }
