@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/theme/light_theme.dart';
@@ -34,7 +35,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         return Scaffold(
           backgroundColor: context.theme.backgroundColor,
           body: LightWatermark(child: getViewForIndex(viewModel.index)),
-          bottomNavigationBar: orientation == Orientation.portrait
+          bottomNavigationBar: orientation == Orientation.portrait || kIsWeb
               ? Material(
                   color: context.theme.primaryColorDark,
                   elevation: 0.0,
@@ -57,7 +58,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         icon: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Icon(
-                            Icons.first_page,
+                            Icons.rocket,
                           ),
                         ),
                       ),
@@ -66,7 +67,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         icon: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Icon(
-                            Icons.first_page,
+                            Icons.rocket,
                           ),
                         ),
                       ),
@@ -75,7 +76,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                         icon: Padding(
                           padding: EdgeInsets.only(top: 10),
                           child: Icon(
-                            Icons.first_page,
+                            Icons.factory,
                           ),
                         ),
                       ),

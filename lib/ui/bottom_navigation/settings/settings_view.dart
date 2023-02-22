@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/ui/bottom_navigation/settings/bio_setting_section.dart';
 import 'package:space_x_app/ui/bottom_navigation/settings/notifications_setting_section.dart';

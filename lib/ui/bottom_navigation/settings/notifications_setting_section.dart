@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/providers/cloud_messaging.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/ui/bottom_navigation/settings/settings_viewmodel.dart';
 import 'package:app_settings/app_settings.dart';
 import 'package:space_x_app/ui/uni_widgets/settings_value_switch.dart';

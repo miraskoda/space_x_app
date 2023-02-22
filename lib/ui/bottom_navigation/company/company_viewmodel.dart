@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retrofit/dio.dart';
 import 'package:space_x_app/app/app.locator.dart';
 import 'package:space_x_app/config/firebase/remote_config_service.dart';
+import 'package:space_x_app/config/services/error_dialog_prompt.dart';
 import 'package:space_x_app/config/services/exception_tracker.dart';
 import 'package:space_x_app/core/managers/data_holder.dart';
 import 'package:space_x_app/data/models/company_info_model/company_model.dart';
@@ -32,13 +33,9 @@ class CompanyViewModel extends BaseViewModel {
       _dataHolder.company = data;
     } catch (e) {
       ExceptionTracker.trackCatchError(e);
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return ErrorViewDialog(() {
-              _fetchCompany(context);
-            });
-          });
+      ErrorDialogPrompt.track(context, () {
+        _fetchCompany(context);
+      });
     }
   }
 }

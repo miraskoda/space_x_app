@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_app/app/app.locator.dart';
 import 'package:space_x_app/app/app.logger.dart';
 import 'package:space_x_app/app/app.router.dart';
-import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';

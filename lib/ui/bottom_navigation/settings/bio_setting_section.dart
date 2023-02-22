@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'dart:math' as math;
-
-import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +8,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_app/app/app.locator.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/services/exception_tracker.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/core/managers/data_holder.dart';
 import 'package:space_x_app/core/resources/authentication.dart';
 import 'package:space_x_app/ui/bottom_navigation/settings/settings_viewmodel.dart';
 import 'package:space_x_app/ui/uni_widgets/set_pin_code/set_pin_code_view.dart';
 import 'package:space_x_app/ui/uni_widgets/settings_value_switch.dart';
-import 'package:space_x_app/ui/uni_widgets/shimmer.dart';
 
 class BioSettingSection extends StatefulWidget {
   SettingsViewModel viewModel;
@@ -100,7 +96,7 @@ class _BioSettingSectionState extends State<BioSettingSection> {
     List<BiometricType>? bioType = _dataHolder.biometricsAvailable;
     return Builder(builder: (BuildContext context) {
       if (bioType != null) {
-        if (bioType?.contains(BiometricType.face) == true) {
+        if (bioType.contains(BiometricType.face) == true) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -124,7 +120,7 @@ class _BioSettingSectionState extends State<BioSettingSection> {
               ),
             ],
           );
-        } else if (bioType?.contains(BiometricType.fingerprint) == true) {
+        } else if (bioType.contains(BiometricType.fingerprint) == true) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

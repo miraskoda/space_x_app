@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/firebase/analytics_service.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String? tooltipMessage;

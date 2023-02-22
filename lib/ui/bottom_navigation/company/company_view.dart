@@ -35,6 +35,7 @@ class _CompanyViewState extends State<CompanyView> {
               ),
               body: SafeArea(
                 child: TabletWrapper(
+                  reducedWithInLandscape: true,
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(24.0),

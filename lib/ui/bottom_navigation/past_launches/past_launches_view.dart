@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:space_x_app/config/extensions/extensions.dart';
+import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/data/models/launch_model/launch_model.dart';
+import 'package:space_x_app/ui/bottom_navigation/past_launches/expanded_content/expanded_content_view.dart';
 import 'package:space_x_app/ui/bottom_navigation/past_launches/past_launches_viewmodel.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
@@ -35,6 +40,7 @@ class _PastLaunchesViewState extends State<PastLaunchesView> {
               ),
               body: SafeArea(
                 child: TabletWrapper(
+                  reducedWithInLandscape: true,
                   child: viewModel.isBusy
                       ? const CircularProgressIndicator()
                       : Column(
@@ -60,22 +66,105 @@ class _PastLaunchesViewState extends State<PastLaunchesView> {
   }
 
   Widget expandableItem(LaunchModel item, PastLaunchesViewModel viewModel) {
+    bool isExpanded = viewModel.isExpanded(item.id);
     return Padding(
       padding: const EdgeInsets.only(top: 24),
       child: WhiteBox(
+          condensed: true,
           color: Colors.transparent,
           child: AnimatedContainer(
-              height: viewModel.expandedTiles.contains(item.id) ? 600 : 200,
-              duration: const Duration(milliseconds: 300),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(item.id!),
-                  PrimaryButton(
-                      text: 'expand',
-                      onPressed: () => viewModel.setExpanded(item.id!))
-                ],
+              height: viewModel.isExpanded(item.id) ? 760 : 180,
+              duration: kBaseAnimationDuration,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            'Mission Name: ',
+                          ),
+                        ),
+                        Flexible(child: Text(item.name ?? '')),
+                      ],
+                    ),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            'Flight number: ',
+                          ),
+                        ),
+                        Flexible(
+                            child: Text((item.flight_number ?? '').toString())),
+                      ],
+                    ),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Text(
+                            'Launch: ',
+                          ),
+                        ),
+                        Flexible(
+                          child: Text(
+                            DateFormat('d.M.yyyy').format(item.date_utc!),
+                          ),
+                        ),
+                      ],
+                    ),
+                    AnimatedContainer(
+                      height: isExpanded ? 580 : 0,
+                      duration: kBaseAnimationDuration,
+                      child: _expandedContent(isExpanded, item.rocket!),
+                    ),
+                    const Gap(20),
+                    PrimaryButton(
+                        padding: EdgeInsets.zero,
+                        child: isExpanded ? _showLess() : _showMore(),
+                        onPressed: () => viewModel.setExpanded(item.id!))
+                  ],
+                ),
               ))),
+    );
+  }
+
+  Widget _expandedContent(bool isExpanded, String id) {
+    return isExpanded ? ExpandedContentView(id) : const SizedBox.shrink();
+  }
+
+  Widget _showMore() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        Icon(Icons.arrow_downward),
+        Gap(10),
+        Text('Show more'),
+        Gap(10),
+        Icon(Icons.arrow_downward),
+      ],
+    );
+  }
+
+  Widget _showLess() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        Icon(Icons.arrow_upward),
+        Gap(10),
+        Text('Close'),
+        Gap(10),
+        Icon(Icons.arrow_upward),
+      ],
     );
   }
 }

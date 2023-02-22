@@ -40,12 +40,23 @@ Future<void> loadMainAppRequirements() async {
   await setupSetry();
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  PushNotificationService.init();
-  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
-
+  if (kIsWeb) {
+    const firebaseConfig = FirebaseOptions(
+        apiKey: "AIzaSyAois3mAmiemfTrDyNgd_fwmtLFxwbvQVQ",
+        authDomain: "spacex-73edc.firebaseapp.com",
+        projectId: "spacex-73edc",
+        storageBucket: "spacex-73edc.appspot.com",
+        messagingSenderId: "681517240136",
+        appId: "1:681517240136:web:b3ad43ff8cc134a53e2d7d",
+        measurementId: "G-68FG2D2EWY");
+    await Firebase.initializeApp(options: firebaseConfig);
+  } else {
+    await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    PushNotificationService.init();
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+  }
   await ThemeManager.initialise();
   await setupInjector(environment: Environment.dev);
 }
@@ -104,7 +115,7 @@ class BaseState extends State<Base> with WidgetsBindingObserver {
             supportedLocales: const [
               Locale('cs'),
             ],
-            onGenerateTitle: (context) => "Doktor online",
+            onGenerateTitle: (context) => "Space X app",
             showSemanticsDebugger: false,
             debugShowCheckedModeBanner: false,
             theme: regularTheme,

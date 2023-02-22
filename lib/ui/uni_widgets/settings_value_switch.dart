@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 
 class SettingsValueSwitch extends StatelessWidget {

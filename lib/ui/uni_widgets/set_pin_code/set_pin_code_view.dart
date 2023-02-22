@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/ui/uni_widgets/light_watermark.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 import 'package:space_x_app/ui/uni_widgets/set_pin_code/set_pin_code_viewmodel.dart';

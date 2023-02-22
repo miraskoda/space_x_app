@@ -16,12 +16,13 @@ const int kSecondIndex = 1;
 const int kThirdIndex = 2;
 const int kSettingsIndex = 3;
 
-// App settings keys
+// App settings
 const String kNotificationsAllowedKey = 'space_kNotificationsAllowedKey';
 const String kAuthorizationFaceAllowedKey = 'space_kAuthFaceAllowedKey';
 const String kAuthorizationTouchAllowedKey = 'space_kAuthTouchAllowedKey';
 const String kUserPinCode = 'kAppkUserPinCode';
 const String kNullBiometricAvailable = 'kNullBiometricAvailable';
+const Duration kBaseAnimationDuration = Duration(milliseconds: 300);
 
 // Locales
 const String kCurrentLocale = 'kCurrentLocale';

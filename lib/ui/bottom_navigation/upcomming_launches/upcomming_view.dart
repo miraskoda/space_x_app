@@ -33,6 +33,7 @@ class _UpcommingViewState extends State<UpcommingView> {
               ),
               body: SafeArea(
                 child: TabletWrapper(
+                  reducedWithInLandscape: true,
                   child: viewModel.isBusy
                       ? const CircularProgressIndicator()
                       : Column(

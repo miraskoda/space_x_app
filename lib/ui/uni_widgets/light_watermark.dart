@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 
 class LightWatermark extends StatelessWidget {
   Widget? child;

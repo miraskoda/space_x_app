@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 import 'package:space_x_app/ui/uni_widgets/tablet_wrapper.dart';

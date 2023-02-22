@@ -1,13 +1,10 @@
 import 'dart:developer';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/config/services/exception_tracker.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/utils/url_lancher.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 
