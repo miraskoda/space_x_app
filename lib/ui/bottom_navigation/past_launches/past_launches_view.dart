@@ -8,7 +8,9 @@ import 'package:space_x_app/ui/bottom_navigation/past_launches/expanded_content/
 import 'package:space_x_app/ui/bottom_navigation/past_launches/past_launches_viewmodel.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
+import 'package:space_x_app/ui/uni_widgets/shimmer.dart';
 import 'package:space_x_app/ui/uni_widgets/tablet_wrapper.dart';
+import 'package:space_x_app/ui/uni_widgets/ugly_row.dart';
 import 'package:space_x_app/ui/uni_widgets/white_box.dart';
 import 'package:stacked/stacked.dart';
 
@@ -22,47 +24,39 @@ class PastLaunchesView extends StatefulWidget {
 class _PastLaunchesViewState extends State<PastLaunchesView> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
-      child: ViewModelBuilder<PastLaunchesViewModel>.reactive(
-          viewModelBuilder: () => PastLaunchesViewModel(),
-          onViewModelReady: (PastLaunchesViewModel viewModel) =>
-              viewModel.initialise(
-                context,
+    return ViewModelBuilder<PastLaunchesViewModel>.reactive(
+        viewModelBuilder: () => PastLaunchesViewModel(),
+        onViewModelReady: (PastLaunchesViewModel viewModel) =>
+            viewModel.initialise(
+              context,
+            ),
+        builder: (BuildContext context, PastLaunchesViewModel viewModel,
+            Widget? child) {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: PrimaryAppBar(
+              centeredTitle: true,
+              title: 'Past Launches',
+            ),
+            body: SafeArea(
+              child: TabletWrapper(
+                reducedWidthInLandscape: true,
+                child: viewModel.isBusy
+                    ? Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: shimmer(400, context),
+                      )
+                    : ListView.builder(
+                        padding: const EdgeInsets.all(24.0),
+                        itemCount: viewModel.data?.length ?? 0,
+                        itemBuilder: (BuildContext context, int i) {
+                          LaunchModel item = viewModel.data![i];
+                          return expandableItem(item, viewModel);
+                        }),
               ),
-          builder: (BuildContext context, PastLaunchesViewModel viewModel,
-              Widget? child) {
-            return Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: PrimaryAppBar(
-                centeredTitle: true,
-                title: 'Past Launches',
-              ),
-              body: SafeArea(
-                child: TabletWrapper(
-                  reducedWithInLandscape: true,
-                  child: viewModel.isBusy
-                      ? const CircularProgressIndicator()
-                      : Column(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.all(24.0),
-                                child: ListView.builder(
-                                    itemCount: viewModel.data?.length ?? 0,
-                                    itemBuilder: (BuildContext context, int i) {
-                                      LaunchModel item = viewModel.data![i];
-                                      return expandableItem(item, viewModel);
-                                    }),
-                              ),
-                            ),
-                          ],
-                        ),
-                ),
-              ),
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 
   Widget expandableItem(LaunchModel item, PastLaunchesViewModel viewModel) {
@@ -79,49 +73,12 @@ class _PastLaunchesViewState extends State<PastLaunchesView> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text(
-                            'Mission Name: ',
-                          ),
-                        ),
-                        Flexible(child: Text(item.name ?? '')),
-                      ],
-                    ),
-                    const Divider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text(
-                            'Flight number: ',
-                          ),
-                        ),
-                        Flexible(
-                            child: Text((item.flight_number ?? '').toString())),
-                      ],
-                    ),
-                    const Divider(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Text(
-                            'Launch: ',
-                          ),
-                        ),
-                        Flexible(
-                          child: Text(
-                            DateFormat('d.M.yyyy').format(item.date_utc!),
-                          ),
-                        ),
-                      ],
-                    ),
+                    uglyRow('Mission Name: ', item.name ?? '', divider: false),
+                    uglyRow('Flight number: ',
+                        (item.flight_number ?? '').toString()),
+                    if (item.date_utc != null)
+                      uglyRow('Launch: ',
+                          DateFormat('d.M.yyyy').format(item.date_utc!)),
                     AnimatedContainer(
                       height: isExpanded ? 580 : 0,
                       duration: kBaseAnimationDuration,

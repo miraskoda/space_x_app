@@ -2,7 +2,7 @@ String kBaseUrl = 'https://api.spacexdata.com/';
 
 // Responsivity
 const double kMinSupportedWidth = 360;
-const double kMaxSupportedWidth = 1200;
+const double kMaxSupportedWidth = 1920;
 const double kMaxTabletWidthContent = 700;
 
 // Remote config

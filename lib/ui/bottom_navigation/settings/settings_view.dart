@@ -48,7 +48,7 @@ class _SettingsViewState extends State<SettingsView> {
               horizontal: 40,
               vertical: MediaQuery.of(context).size.width < 360 ? 0 : 50),
           child: TabletWrapper(
-              reducedWithInLandscape: true,
+              reducedWidthInLandscape: true,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

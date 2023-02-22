@@ -43,7 +43,7 @@ class _PinCodeViewState extends State<PinCodeView> {
             backgroundColor: context.theme.backgroundColor,
             body: LightWatermark(
               child: TabletWrapper(
-                reducedWithInLandscape: true,
+                reducedWidthInLandscape: true,
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 12),

@@ -3,8 +3,8 @@ import 'package:space_x_app/core/constants/constants.dart';
 
 class TabletWrapper extends StatelessWidget {
   Widget? child;
-  bool reducedWithInLandscape;
-  TabletWrapper({this.child, this.reducedWithInLandscape = false, Key? key})
+  bool reducedWidthInLandscape;
+  TabletWrapper({this.child, this.reducedWidthInLandscape = false, Key? key})
       : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class TabletWrapper extends StatelessWidget {
               constraints: BoxConstraints(
                   maxWidth: orientation == Orientation.portrait
                       ? kMaxTabletWidthContent
-                      : reducedWithInLandscape
+                      : reducedWidthInLandscape
                           ? kMaxTabletWidthContent
                           : double.infinity),
               child: child));

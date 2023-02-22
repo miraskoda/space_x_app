@@ -2,6 +2,8 @@
 ## Space X api project
 ## Startup guide
 
+## WEB APP -> https://spacex-73edc.web.app/
+
 Before app first start you need to run:
 
 1) `./phrase pull`

@@ -92,7 +92,7 @@ class _LanguageBottomSheetState extends State<LanguageBottomSheet> {
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: TabletWrapper(
-          reducedWithInLandscape: true,
+          reducedWidthInLandscape: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

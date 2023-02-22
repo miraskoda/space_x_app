@@ -17,43 +17,39 @@ class CompanyView extends StatefulWidget {
 class _CompanyViewState extends State<CompanyView> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
-      child: ViewModelBuilder<CompanyViewModel>.reactive(
-          viewModelBuilder: () => CompanyViewModel(),
-          onViewModelReady: (CompanyViewModel viewModel) =>
-              viewModel.initialise(
-                context,
-              ),
-          builder: (BuildContext context, CompanyViewModel viewModel,
-              Widget? child) {
-            return Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: PrimaryAppBar(
-                centeredTitle: true,
-                title: 'Company Info',
-              ),
-              body: SafeArea(
-                child: TabletWrapper(
-                  reducedWithInLandscape: true,
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: viewModel.isBusy
-                          ? shimmer(400, context)
-                          : SizedBox(
-                              width: double.infinity,
-                              child: WhiteBox(
-                                color: Colors.transparent,
-                                child: uglyColumn(viewModel.data, context),
-                              ),
+    return ViewModelBuilder<CompanyViewModel>.reactive(
+        viewModelBuilder: () => CompanyViewModel(),
+        onViewModelReady: (CompanyViewModel viewModel) => viewModel.initialise(
+              context,
+            ),
+        builder:
+            (BuildContext context, CompanyViewModel viewModel, Widget? child) {
+          return Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: PrimaryAppBar(
+              centeredTitle: true,
+              title: 'Company Info',
+            ),
+            body: SafeArea(
+              child: TabletWrapper(
+                reducedWidthInLandscape: true,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: viewModel.isBusy
+                        ? shimmer(400, context)
+                        : SizedBox(
+                            width: double.infinity,
+                            child: WhiteBox(
+                              color: Colors.transparent,
+                              child: uglyColumn(viewModel.data, context),
                             ),
-                    ),
+                          ),
                   ),
                 ),
               ),
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }

@@ -6,6 +6,7 @@ import 'package:space_x_app/core/managers/data_holder.dart';
 import 'package:space_x_app/data/repository/space_repository.dart';
 import 'package:space_x_app/data/repository_impl/space_repository_impl.dart';
 import 'package:space_x_app/ui/bottom_navigation/bottom_navigation_view.dart';
+import 'package:space_x_app/ui/bottom_navigation/upcomming_launches/upcomming_detail/upcomming_detail_view.dart';
 import 'package:space_x_app/ui/splash/splash_screen_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -15,6 +16,7 @@ import 'package:stacked_themes/stacked_themes.dart';
   routes: <StackedRoute<dynamic>>[
     MaterialRoute(page: SplashScreen, initial: true),
     MaterialRoute(page: BottomNavigation),
+    MaterialRoute(page: UpcommingDetailView),
   ],
   dependencies: <DependencyRegistration>[
     // Lazy singletons
