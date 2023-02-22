@@ -35,6 +35,18 @@ class _UpcommingViewState extends State<UpcommingView> {
             appBar: PrimaryAppBar(
               centeredTitle: true,
               title: 'Upcomming Launches',
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 24),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => viewModel.toFiltering(context),
+                        child: const Icon(Icons.filter_alt)),
+                  ),
+                )
+              ],
             ),
             body: SafeArea(
               child: TabletWrapper(
@@ -44,13 +56,34 @@ class _UpcommingViewState extends State<UpcommingView> {
                         padding: const EdgeInsets.all(24.0),
                         child: shimmer(400, context),
                       )
-                    : ListView.builder(
-                        padding: const EdgeInsets.all(24.0),
-                        itemCount: viewModel.data?.length ?? 0,
-                        itemBuilder: (BuildContext context, int i) {
-                          LaunchModel item = viewModel.data![i];
-                          return expandableItem(item, viewModel);
-                        }),
+                    : Builder(builder: (context) {
+                        List<LaunchModel>? filteredItems = viewModel.data
+                            ?.where((LaunchModel element) =>
+                                element.name?.toLowerCase().trim().contains(viewModel.response.fulltext?.trim().toLowerCase() ?? '') ==
+                                true)
+                            .where((LaunchModel element) =>
+                                element.flight_number.toString().contains(
+                                    viewModel.response.flightNumber ?? '') ==
+                                true)
+                            .where((LaunchModel element) =>
+                                viewModel.response.recovered == true
+                                    ? element.fairings?.recovered == true
+                                    : true)
+                            .where((LaunchModel element) =>
+                                viewModel.response.reused == true
+                                    ? element.fairings?.reused == true
+                                    : true)
+                            .where((LaunchModel element) =>
+                                viewModel.response.success == true ? element.success == true : true)
+                            .toList();
+                        return ListView.builder(
+                            padding: const EdgeInsets.all(24.0),
+                            itemCount: filteredItems?.length ?? 0,
+                            itemBuilder: (BuildContext context, int i) {
+                              LaunchModel item = filteredItems![i];
+                              return expandableItem(item, viewModel);
+                            });
+                      }),
               ),
             ),
           );
