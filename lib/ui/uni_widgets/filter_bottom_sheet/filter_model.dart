@@ -12,6 +12,14 @@ class FilterModel {
     this.recovered,
     this.reused,
   });
+
+  bool getBoolActivedFiltering() {
+    return fulltext?.isNotEmpty == true ||
+        flightNumber?.isNotEmpty == true ||
+        success == true ||
+        recovered == true ||
+        reused == true;
+  }
 }
 
 List<String> filterList = [

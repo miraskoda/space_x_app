@@ -16,13 +16,22 @@ const int kSecondIndex = 1;
 const int kThirdIndex = 2;
 const int kSettingsIndex = 3;
 
-// App settings
+// App settings keys
 const String kNotificationsAllowedKey = 'space_kNotificationsAllowedKey';
 const String kAuthorizationFaceAllowedKey = 'space_kAuthFaceAllowedKey';
 const String kAuthorizationTouchAllowedKey = 'space_kAuthTouchAllowedKey';
 const String kUserPinCode = 'kAppkUserPinCode';
 const String kNullBiometricAvailable = 'kNullBiometricAvailable';
+
+// Global app settings
 const Duration kBaseAnimationDuration = Duration(milliseconds: 300);
+
+// Keys for Shared preferences filtering
+const String kFulltextFilterKey = 'kFulltextFilterKey';
+const String kFlightNumberFilterKey = 'kFlightNumberFilterKey';
+const String kSuccessFilterKey = 'kSuccessFilterKey';
+const String kRecoveredFilterKey = 'kRecoveredFilterKey';
+const String kReusedFilterKey = 'kReusedFilterKey';
 
 // Locales
 const String kCurrentLocale = 'kCurrentLocale';

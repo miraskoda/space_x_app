@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x_app/config/extensions/extensions.dart';
-import 'package:space_x_app/config/theme/light_theme.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/ui/bottom_navigation/bottom_navigation_viewmodel.dart';
 import 'package:space_x_app/ui/bottom_navigation/company/company_view.dart';
@@ -35,64 +34,61 @@ class _BottomNavigationState extends State<BottomNavigation> {
         return Scaffold(
           backgroundColor: context.theme.backgroundColor,
           body: LightWatermark(child: getViewForIndex(viewModel.index)),
-          bottomNavigationBar: orientation == Orientation.portrait || kIsWeb
-              ? Material(
-                  color: context.theme.primaryColorDark,
-                  elevation: 0.0,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20))),
-                  child: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    selectedLabelStyle: const TextStyle(fontSize: 11),
-                    unselectedLabelStyle: const TextStyle(fontSize: 11),
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    currentIndex: viewModel.index,
-                    unselectedItemColor: context.theme.primaryColorLight,
-                    selectedItemColor: context.theme.backgroundColor,
-                    onTap: (int i) => viewModel.setTabIndex(i, context),
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
-                        label: "Past",
-                        icon: Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Icon(
-                            Icons.rocket,
-                          ),
-                        ),
-                      ),
-                      BottomNavigationBarItem(
-                        label: "Upcomming",
-                        icon: Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Icon(
-                            Icons.rocket,
-                          ),
-                        ),
-                      ),
-                      BottomNavigationBarItem(
-                        label: "Company",
-                        icon: Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Icon(
-                            Icons.factory,
-                          ),
-                        ),
-                      ),
-                      BottomNavigationBarItem(
-                        label: "Settings",
-                        icon: Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: Icon(
-                            Icons.settings,
-                          ),
-                        ),
-                      ),
-                    ],
+          bottomNavigationBar: Material(
+            color: context.theme.primaryColorDark,
+            elevation: 0.0,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              selectedLabelStyle: const TextStyle(fontSize: 11),
+              unselectedLabelStyle: const TextStyle(fontSize: 11),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              currentIndex: viewModel.index,
+              unselectedItemColor: context.theme.primaryColorLight,
+              selectedItemColor: context.theme.backgroundColor,
+              onTap: (int i) => viewModel.setTabIndex(i, context),
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  label: "Past",
+                  icon: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Icon(
+                      Icons.rocket,
+                    ),
                   ),
-                )
-              : null,
+                ),
+                BottomNavigationBarItem(
+                  label: "Upcomming",
+                  icon: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Icon(
+                      Icons.rocket,
+                    ),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Company",
+                  icon: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Icon(
+                      Icons.factory,
+                    ),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "Settings",
+                  icon: Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Icon(
+                      Icons.settings,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         );
       }),
       viewModelBuilder: () => BottomNavigationViewModel(),

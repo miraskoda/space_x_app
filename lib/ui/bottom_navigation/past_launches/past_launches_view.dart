@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/data/models/launch_model/launch_model.dart';
 import 'package:space_x_app/ui/bottom_navigation/past_launches/expanded_content/expanded_content_view.dart';
 import 'package:space_x_app/ui/bottom_navigation/past_launches/past_launches_viewmodel.dart';
+import 'package:space_x_app/ui/uni_widgets/filter_icon.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 import 'package:space_x_app/ui/uni_widgets/shimmer.dart';
@@ -40,10 +40,12 @@ class _PastLaunchesViewState extends State<PastLaunchesView> {
                   padding: const EdgeInsets.only(right: 24),
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () => viewModel.toFiltering(context),
-                        child: const Icon(Icons.filter_alt)),
+                    child: FilterIcon(
+                      onPressed: () => viewModel.toFiltering(context),
+                      child: viewModel.response.getBoolActivedFiltering()
+                          ? const SizedBox.shrink()
+                          : null,
+                    ),
                   ),
                 )
               ],

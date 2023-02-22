@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/data/models/launch_model/launch_model.dart';
 import 'package:space_x_app/ui/bottom_navigation/upcomming_launches/upcomming_viewmodel.dart';
+import 'package:space_x_app/ui/uni_widgets/filter_icon.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_app_bar.dart';
 import 'package:space_x_app/ui/uni_widgets/primary_button.dart';
 import 'package:space_x_app/ui/uni_widgets/shimmer.dart';
@@ -40,10 +40,12 @@ class _UpcommingViewState extends State<UpcommingView> {
                   padding: const EdgeInsets.only(right: 24),
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () => viewModel.toFiltering(context),
-                        child: const Icon(Icons.filter_alt)),
+                    child: FilterIcon(
+                      onPressed: () => viewModel.toFiltering(context),
+                      child: viewModel.response.getBoolActivedFiltering()
+                          ? const SizedBox.shrink()
+                          : null,
+                    ),
                   ),
                 )
               ],
@@ -73,8 +75,7 @@ class _UpcommingViewState extends State<UpcommingView> {
                                 viewModel.response.reused == true
                                     ? element.fairings?.reused == true
                                     : true)
-                            .where((LaunchModel element) =>
-                                viewModel.response.success == true ? element.success == true : true)
+                            .where((LaunchModel element) => viewModel.response.success == true ? element.success == true : true)
                             .toList();
                         return ListView.builder(
                             padding: const EdgeInsets.all(24.0),

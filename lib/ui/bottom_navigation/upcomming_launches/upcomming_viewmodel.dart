@@ -10,6 +10,7 @@ import 'package:space_x_app/config/services/error_dialog_prompt.dart';
 import 'package:space_x_app/config/services/exception_tracker.dart';
 import 'package:space_x_app/core/constants/constants.dart';
 import 'package:space_x_app/core/managers/data_holder.dart';
+import 'package:space_x_app/core/utils/shared_prefs_utility.dart';
 import 'package:space_x_app/data/models/launch_model/launch_model.dart';
 import 'package:space_x_app/data/repository/space_repository.dart';
 import 'package:space_x_app/ui/uni_widgets/filter_bottom_sheet/filter_bottom_sheet.dart';
@@ -27,12 +28,14 @@ class UpcommingViewModel extends BaseViewModel {
 
   List<LaunchModel>? data;
 
-  void initialise(BuildContext context) {
+  void initialise(BuildContext context) async {
+    response = await SharedprefsUtility.load('up');
     if (_dataHolder.upcomming == null) {
       _fetchUpcomming(context);
     } else {
       data = _dataHolder.upcomming;
     }
+    notifyListeners();
   }
 
   Future<void> _fetchUpcomming(BuildContext context) async {
@@ -71,6 +74,7 @@ class UpcommingViewModel extends BaseViewModel {
         });
     if (res == null) return;
     response = res;
+    await SharedprefsUtility.save(res, 'up');
     notifyListeners();
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:space_x_app/config/extensions/extensions.dart';
 import 'package:space_x_app/core/resources/authentication.dart';
 
 class BiometricAuthorization {

@@ -7,7 +7,6 @@ import 'package:space_x_app/config/services/exception_tracker.dart';
 import 'package:space_x_app/core/managers/data_holder.dart';
 import 'package:space_x_app/data/models/company_info_model/company_model.dart';
 import 'package:space_x_app/data/repository/space_repository.dart';
-import 'package:space_x_app/ui/error/error_dialog.dart';
 import 'package:stacked/stacked.dart';
 
 class CompanyViewModel extends BaseViewModel {
