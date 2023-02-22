@@ -1,16 +1,30 @@
-# space_x_app
 
-A new Flutter project.
+## Space X api project
+## Startup guide
 
-## Getting Started
+## WEB APP -> https://spacex-73edc.web.app/
 
-This project is a starting point for a Flutter application.
+Before app first start you need to run:
 
-A few resources to get you started if this is your first Flutter project:
+1) `./phrase pull`
+2) `flutter pub get`
+3) `flutter pub run phrase`
+4) `flutter pub run build_runner build --delete-conflicting-outputs`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+When cocoa pods install error: Execute below to install the required ffi run:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+`sudo arch -x86_64 gem install ffi`
+
+Instead of pod install use:
+
+`arch -x86_64 pod install`
+
+If not work try this
+
+`arch -x86_64 pod install --repo-update`
+
+In case you tried everything and still you are not able to install pods try this as the last resort:
+
+1) `sudo gem uninstall cocoapods`
+2) `brew install cocoapods`
+3) `arch -x86_64 pod install`
